@@ -10,7 +10,7 @@ import sys
 def ejercicio_1():
     nombre = pedir_texto("Inserte su nombre completo: ")
     edad = pedir_entero("Inserte su edad: ", 13, 110)
-    ingreso = pedir_float("Inserte el total de sus ingresos anuales: ", 0.0)
+    ingreso = pedir_float("Inserte el total de sus ingresos anuales: ", 0)
     mayor = edad > 65
     tax = 0.0
 
@@ -92,3 +92,42 @@ def ejercicio_3():
             retirar(saldo)
     saldo = retirar(saldo)
 
+#Ejercicio 4 — Categoría de conductores
+def ejercicio_4():
+    nombre = pedir_texto("Inserte su nombre: ")
+    edad = pedir_entero("Inserte su edad: ", 13, )
+    experiencia = pedir_entero("Inserte su años de experiencia: ", 0)
+    if edad < 18:
+        error("No puedes conducir!")
+    elif edad >= 18 and experiencia < 1:
+        info(f"nombre: {nombre.title()}")
+        warn("Principiante")
+    elif edad >= 21 and 1 < experiencia < 5:
+        info(f"nombre: {nombre.title()}")
+        warn("Conductor intermedio")
+    elif edad >= 30 and experiencia > 10:
+        info(f"nombre: {nombre.title()}")
+        ok("Conductor profesional")
+    else:
+        info(f"nombre: {nombre.title()}")
+        ok("Conductor estándar")
+
+#Ejercicio 5 — Simulador de carrito de compras
+def ejercicio_5():
+    
+    nombre = pedir_texto("Inserte nombre de cliente: ")
+    produc = pedir_entero("Inserte cantidad de productos: ", 0)
+    monto = pedir_float("Inserte su monto total: ", 0)
+    medios = {"efectivo": -0.15 , "debito": -0.10, "credito": 0.05, "mercado pago": -0.2 if monto > 10000 else 0}
+    opcion = pedir_opcion("Elija su medio de pago: ", medios.keys())
+    subtotal = monto * medios[opcion]
+    print(Fore.BLUE + Style.BRIGHT + "--- Factura B ---")
+    print(Fore.CYAN + Style.DIM + f"Cliente: {nombre.upper()}\nProductos: {produc} unidades.\nMonto: ${monto}\nMedio de Pago: {opcion.upper()}\n{f"Descuento aplicado: -${subtotal*-1}" if subtotal < 0.1 else f"Recargo aplicado: ${subtotal}"}") 
+    if produc < 10:
+        print(Fore.CYAN + Style.DIM + f"Total: ${monto + subtotal}")
+    else:
+        print( Fore.CYAN + Style.DIM + f"Subtotal: ${monto + subtotal}\nDescuento 5%: -${monto * 0.05}\nTotal: ${(monto + subtotal) - (monto * 0.05)}\n##Descuento del 5% por llevar más de 10 unidades##")
+    print(Fore.BLUE + Style.BRIGHT + "---------")
+
+
+ejercicio_5()
